@@ -1,3 +1,2 @@
 ﻿  XML generator.cpp
-C:\Users\2000245\OneDrive - Dundee and Angus College\Documents\Year 2\Repository\XML generator\XML generator\XML generator.cpp(71,9): warning C4101: 'idFinder': unreferenced local variable
-  XML generator.vcxproj -> C:\Users\2000245\OneDrive - Dundee and Angus College\Documents\Year 2\Repository\XML generator\x64\Debug\XML generator.exe
+LINK : fatal error LNK1168: cannot open C:\Users\2000245\OneDrive - Dundee and Angus College\Documents\Year 2\Repository\XML generator\x64\Debug\XML generator.exe for writing

@@ -3,40 +3,43 @@
 #include <string>
 
 void ReadFile() {
-    int subnav;
-    int idFinder;
-
-    subnav = 0;
+    struct contactStructure {
+        std::string idLength;
+        std::string contactID;
+        std::string firstNameLength;
+        std::string firstName;
+        std::string lastNameLength;
+        std::string lastName;
+        std::string emailLength;
+        std::string email;
+        std::string countryNameLength;
+        std::string countryName;
+    } contactStruct;
+    
     std::string getcontent;
     std::ifstream openfile("./contacts.csv");
     if (openfile.fail()) {
         std::cout << "the file cannot be read\n";
     }
     else {
+        // Check if file is open
         if (openfile.is_open())
         {
             while (!openfile.eof())
             {
-                getline(openfile, getcontent);
-                std::cout << getcontent << std::endl << "";
+                std::getline(openfile, contactStruct.idLength, ',');
+                std::getline(openfile, contactStruct.contactID, ',');
+                std::getline(openfile, contactStruct.firstNameLength, ',');
+                std::getline(openfile, contactStruct.firstName, ',');
+                std::getline(openfile, contactStruct.lastNameLength, ',');
+                std::getline(openfile, contactStruct.lastName, ',');
+                std::getline(openfile, contactStruct.emailLength, ',');
+                std::getline(openfile, contactStruct.email, ',');
+                std::getline(openfile, contactStruct.countryNameLength, ',');
+                std::getline(openfile, contactStruct.countryName, ',');
+                std::cout << contactStruct.idLength << ',' << contactStruct.contactID << ',' << contactStruct.firstNameLength << ',' << contactStruct.firstName << ',' << contactStruct.lastNameLength << ',' << contactStruct.lastName << ',' << contactStruct.emailLength << ',' << contactStruct.email << ',' << contactStruct.countryNameLength << ',' << contactStruct.countryName << std::endl << "";
             }
         }
-    }
-
-    //Gives the user choice for filtering the data
-    std::cout << "Which would you like to filter by:\nPress 1 for Contact ID\nPress 2 First Name\nPress 3 Last Name\nPress 4 Country\n";
-    if (subnav == 1) {
-        std::cout << "which contact id are you looking for?\n";
-        std::cin >> idFinder;
-    }
-    else if (subnav == 2) {
-
-    }
-    else if (subnav == 3) {
-
-    }
-    else {
-
     }
 }
 
@@ -78,12 +81,12 @@ int main()
             WriteFile();
         }
         else if (nav == 3) {
-            //Ends the program
+            // Ends the program
             std::cout << "Ending program...";
             return 0;
         }
         else {
-            //Loops until a user picks a valid number
+            // Loops until a user picks a valid number
             std::cout << "Number must be between 1 and 3\n";
             std::cin >> nav;
         }
