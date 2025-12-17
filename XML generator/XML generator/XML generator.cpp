@@ -2,21 +2,21 @@
 #include <fstream>
 #include <string>
 
+struct contactStructure {
+    std::string idLength;
+    std::string contactID;
+    std::string firstNameLength;
+    std::string firstName;
+    std::string lastNameLength;
+    std::string lastName;
+    std::string emailLength;
+    std::string email;
+    std::string countryNameLength;
+    std::string countryName;
+} contactStruct;
+
 void ReadFile() {
-    struct contactStructure {
-        std::string idLength;
-        std::string contactID;
-        std::string firstNameLength;
-        std::string firstName;
-        std::string lastNameLength;
-        std::string lastName;
-        std::string emailLength;
-        std::string email;
-        std::string countryNameLength;
-        std::string countryName;
-    } contactStruct;
-    
-    std::string getcontent;
+
     std::ifstream openfile("./contacts.csv");
     if (openfile.fail()) {
         std::cout << "the file cannot be read\n";
@@ -25,9 +25,8 @@ void ReadFile() {
         // Check if file is open
         if (openfile.is_open())
         {
-            while (!openfile.eof())
+            while (std::getline(openfile, contactStruct.idLength, ','))
             {
-                std::getline(openfile, contactStruct.idLength, ',');
                 std::getline(openfile, contactStruct.contactID, ',');
                 std::getline(openfile, contactStruct.firstNameLength, ',');
                 std::getline(openfile, contactStruct.firstName, ',');
@@ -36,11 +35,13 @@ void ReadFile() {
                 std::getline(openfile, contactStruct.emailLength, ',');
                 std::getline(openfile, contactStruct.email, ',');
                 std::getline(openfile, contactStruct.countryNameLength, ',');
-                std::getline(openfile, contactStruct.countryName, ',');
-                std::cout << contactStruct.idLength << ',' << contactStruct.contactID << ',' << contactStruct.firstNameLength << ',' << contactStruct.firstName << ',' << contactStruct.lastNameLength << ',' << contactStruct.lastName << ',' << contactStruct.emailLength << ',' << contactStruct.email << ',' << contactStruct.countryNameLength << ',' << contactStruct.countryName << std::endl << "";
+                std::getline(openfile, contactStruct.countryName);
+                std::cout << contactStruct.idLength << ',' << contactStruct.contactID << ',' << contactStruct.firstNameLength << ',' << contactStruct.firstName << ',' << contactStruct.lastNameLength << ',' << contactStruct.lastName << ',' << contactStruct.emailLength << ',' << contactStruct.email << ',' << contactStruct.countryNameLength << ',' << contactStruct.countryName << std::endl  << "";
             }
         }
+        std::cout << "\n";
     }
+    openfile.close();
 }
 
 void WriteFile() {
@@ -50,13 +51,34 @@ void WriteFile() {
     // Fills in the file
     MyFile << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
     MyFile << "<allcontacts xmlns:xsi=\"https://www.w3.org/2001/XMLSchema-instance\">\n     xsi:noNamespaceSchemaLocation=\"contacts.xsd\">\n";
-    for (int i = 0; i < 1000; i++) {
-        MyFile << " <contact id=\"" << i << "\">\n";
-        MyFile << "     <firstname>" << "</firstname>\n";
-        MyFile << "     <lastname>" << "</lastname>\n";
-        MyFile << "     <email>" << "</email>\n";
-        MyFile << "     <country>" << "</country>\n";
-        MyFile << " </contact>\n";
+    std::ifstream openfile("./contacts.csv");
+    if (openfile.fail()) {
+        std::cout << "the file cannot be read\n";
+    }
+    else {
+        // Check if file is open
+        if (openfile.is_open())
+        {
+            while (std::getline(openfile, contactStruct.idLength, ','))
+            {
+                std::getline(openfile, contactStruct.contactID, ',');
+                std::getline(openfile, contactStruct.firstNameLength, ',');
+                std::getline(openfile, contactStruct.firstName, ',');
+                std::getline(openfile, contactStruct.lastNameLength, ',');
+                std::getline(openfile, contactStruct.lastName, ',');
+                std::getline(openfile, contactStruct.emailLength, ',');
+                std::getline(openfile, contactStruct.email, ',');
+                std::getline(openfile, contactStruct.countryNameLength, ',');
+                std::getline(openfile, contactStruct.countryName);
+
+                MyFile << " <contact id=" << contactStruct.contactID << ">\n";
+                MyFile << "     <firstname>" << contactStruct.firstName << "</firstname>\n";
+                MyFile << "     <lastname>" << contactStruct.lastName << "</lastname>\n";
+                MyFile << "     <email>"<< contactStruct.email << "</email>\n";
+                MyFile << "     <country>" << contactStruct.countryName << "</country>\n";
+                MyFile << " </contact>\n";
+            }
+        }
     }
     MyFile << "</allcontacts>";
 
