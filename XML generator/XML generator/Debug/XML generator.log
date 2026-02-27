@@ -1,0 +1,8 @@
+﻿  contactStructFile.h
+  ReadFileClass.cpp
+  WriteFileClass.cpp
+  XML generator.cpp
+  Generating Code...
+ReadFileClass.obj : error LNK2005: "struct contactStructure contactStruct" (?contactStruct@@3UcontactStructure@@A) already defined in contactStructFile.obj
+WriteFileClass.obj : error LNK2005: "struct contactStructure contactStruct" (?contactStruct@@3UcontactStructure@@A) already defined in contactStructFile.obj
+C:\Users\2000245\OneDrive - Dundee and Angus College\Documents\Year 2\Repository\XML generator\Debug\XML generator.exe : fatal error LNK1169: one or more multiply defined symbols found

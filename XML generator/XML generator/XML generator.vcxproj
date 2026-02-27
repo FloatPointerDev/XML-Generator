@@ -123,7 +123,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="contactStructFile.h" />
+    <ClCompile Include="ReadFileClass.cpp" />
+    <ClCompile Include="WriteFileClass.cpp" />
     <ClCompile Include="XML generator.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ReadFileClass.h" />
+    <ClInclude Include="WriteFileClass.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
